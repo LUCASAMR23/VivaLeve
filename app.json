@@ -1,11 +1,14 @@
 {
   "expo": {
     "name": "VivaLeve",
-    "slug": "VivaLeve",
+    "slug": "vivaleve",
+    "scheme": "vivaleve",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "description": "Aplicativo educativo de bem-estar, hábitos e organização alimentar.",
+    "plugins": ["expo-router"],
     "ios": {
       "supportsTablet": true
     },
