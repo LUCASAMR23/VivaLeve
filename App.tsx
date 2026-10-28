@@ -42,6 +42,38 @@ export default function App() {
     return 'Criar uma rotina que caiba na sua vida.';
   }, [goal]);
 
+  useEffect(() => {
+    if (!started) return;
+
+    let isCurrent = true;
+    AsyncStorage.getItem(getHabitStorageKey())
+      .then((savedHabits) => {
+        if (!isCurrent || !savedHabits) return;
+        const parsedHabits: unknown = JSON.parse(savedHabits);
+        if (Array.isArray(parsedHabits) && parsedHabits.every((item) => Number.isInteger(item))) {
+          setCompletedHabits(parsedHabits.filter((item): item is number => typeof item === 'number' && item >= 0 && item < habits.length));
+        }
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        if (isCurrent) setHabitsLoaded(true);
+      });
+
+    return () => { isCurrent = false; };
+  }, [started]);
+
+  async function toggleHabit(index: number) {
+    const nextHabits = completedHabits.includes(index)
+      ? completedHabits.filter((item) => item !== index)
+      : [...completedHabits, index];
+    setCompletedHabits(nextHabits);
+    try {
+      await AsyncStorage.setItem(getHabitStorageKey(), JSON.stringify(nextHabits));
+    } catch {
+      // A pessoa ainda consegue acompanhar a sessão atual se o armazenamento falhar.
+    }
+  }
+
   if (!started) return (
     <SafeAreaView style={s.safe}><StatusBar style="dark" />
       <ScrollView contentContainerStyle={s.onboarding} keyboardShouldPersistTaps="handled">
