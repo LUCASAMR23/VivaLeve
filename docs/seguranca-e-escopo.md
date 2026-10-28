@@ -11,6 +11,12 @@ O VivaLeve organiza metas de bem-estar e sugestões educativas de alimentação.
 - Não é indicado para menores de idade, gestação, alergias, condições de saúde ou transtornos alimentares sem acompanhamento profissional.
 - O app deve orientar a busca por nutricionista ou médico quando a pessoa indicar necessidade específica.
 
+## Dados locais
+
+- Peso, meta de mudança e sinalização de necessidade específica não são persistidos nesta versão.
+- Apenas a lista de hábitos concluídos no dia é salva localmente para continuidade da experiência.
+- O armazenamento local usado para esses check-ins não é criptografado; por isso não recebe informações de saúde ou identificação sensível.
+
 ## Princípios de conteúdo
 
 - Priorizar variedade, equilíbrio, moderação e diversidade alimentar.
