@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { useMemo, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useMemo, useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 type Tab = 'Hoje' | 'Plano' | 'Perfil';
@@ -13,6 +14,15 @@ const meals = [
   ['Lanche', 'Deixe opções simples por perto, como frutas, iogurte natural ou castanhas.'],
   ['Jantar', 'Priorize uma refeição caseira e faça pausas para perceber fome e saciedade.'],
 ];
+const habits = [
+  ['Planejar uma refeição caseira', 'Decida antes da fome chegar.'],
+  ['Adicionar cor ao prato', 'Inclua frutas, legumes ou verduras em uma refeição.'],
+  ['Movimentar o corpo', 'Escolha uma atividade que combine com seu momento.'],
+];
+
+function getHabitStorageKey() {
+  return `@vivaleve/habits/${new Date().toLocaleDateString('sv-SE')}`;
+}
 
 export default function App() {
   const [started, setStarted] = useState(false);
