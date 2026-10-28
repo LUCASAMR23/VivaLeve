@@ -33,6 +33,8 @@ export default function App() {
   const [goal, setGoal] = useState<Goal>('Criar hábitos');
   const [activity, setActivity] = useState('Em movimento');
   const [needsCare, setNeedsCare] = useState(false);
+  const [completedHabits, setCompletedHabits] = useState<number[]>([]);
+  const [habitsLoaded, setHabitsLoaded] = useState(false);
   const firstName = name.trim().split(' ')[0] || 'você';
   const weeklyFocus = useMemo(() => {
     if (goal === 'Perder peso') return 'Construir mudanças sustentáveis, sem atalhos.';
